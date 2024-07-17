@@ -55,3 +55,14 @@ func (c *UserController) Withdraw(input model.WithdrawInput) (err error) {
 	fmt.Println("Withdraw Success")
 	return err
 }
+
+func (c *UserController) Transfer(input model.TransferInput) (err error) {
+
+	transferBalanceInput := model.TransferBalanceInput(input)
+	err = c.UserUseCase.TransferBalance(transferBalanceInput)
+	if err != nil {
+		return err
+	}
+	fmt.Println("Transfer Success")
+	return err
+}

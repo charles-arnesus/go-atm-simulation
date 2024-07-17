@@ -1,5 +1,12 @@
 package model
 
+const (
+	InvalidCredential  string = "invalid account number / pin"
+	InvalidAccount     string = "invalid account"
+	InvalidAmount      string = "invalid amount"
+	InsufficientAmount string = "insufficient amount"
+)
+
 type AccountInformationDetail struct {
 	AccountNumber string
 	Name          string
@@ -27,15 +34,6 @@ type VerifyAccountOutput struct {
 	AccountNumber string
 }
 
-type VerifyAccountInfoRepoInput struct {
-	AccountNumber string
-	Pin           string
-}
-
-type VerifyAccountInfoRepoOutput struct {
-	AccountNumber string
-}
-
 type ShowAccountBalanceInput struct {
 	AccountNumber string
 }
@@ -56,6 +54,7 @@ type GetAccountInfoRepoInput struct {
 
 type GetAccountInfoRepoOutput struct {
 	AccountNumber string
+	Pin           string
 	Name          string
 	Balance       int64
 }
@@ -70,7 +69,24 @@ type WithdrawBalanceInput struct {
 	Amount        string
 }
 
-type WithdrawBalanceRepoInput struct {
+type TransferInput struct {
+	AccountNumberSource      string
+	AccountNumberDestination string
+	Amount                   string
+}
+
+type TransferBalanceInput struct {
+	AccountNumberSource      string
+	AccountNumberDestination string
+	Amount                   string
+}
+
+type SubstractBalanceInput struct {
 	AccountNumber string
-	Amount        string
+	Amount        int64
+}
+
+type AddBalanceInput struct {
+	AccountNumber string
+	Amount        int64
 }

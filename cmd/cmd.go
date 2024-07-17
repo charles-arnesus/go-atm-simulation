@@ -92,6 +92,38 @@ func Start(userDelivery *delivery.UserController) {
 			continue
 		case "3":
 			//Transfer
+			fmt.Println("Enter Account Number Destination:")
+			fmt.Print("->")
+
+			accountNumberDestination, err := reader.ReadString('\n')
+			if err != nil {
+				fmt.Println(err)
+				break
+			}
+			accountNumberDestination = strings.Replace(accountNumberDestination, "\n", "", -1)
+
+			fmt.Println("Enter Transfer Amount:")
+			fmt.Print("->")
+
+			transferAmount, err := reader.ReadString('\n')
+			if err != nil {
+				fmt.Println(err)
+				break
+			}
+			transferAmount = strings.Replace(transferAmount, "\n", "", -1)
+
+			transferInput := model.TransferInput{
+				AccountNumberSource:      loginOutput.AccountNumber,
+				AccountNumberDestination: accountNumberDestination,
+				Amount:                   transferAmount,
+			}
+
+			err = userDelivery.Transfer(transferInput)
+			if err != nil {
+				fmt.Println(err)
+				break
+			}
+
 			continue
 		default:
 			fmt.Println("Thank you for using ABC")

@@ -4,13 +4,6 @@ import "go-atm-simulation/model"
 
 var Accounts model.AccountInformation
 
-const (
-	InvalidCredential  string = "invalid account number / pin"
-	InvalidAccount     string = "invalid account"
-	InvalidAmount      string = "invalid amount"
-	InsufficientAmount string = "insufficient amount"
-)
-
 func New() (output model.AccountInformation) {
 	output = make(model.AccountInformation)
 
