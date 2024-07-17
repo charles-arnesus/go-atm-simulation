@@ -2,12 +2,16 @@ package main
 
 import (
 	"go-atm-simulation/cmd"
+	"go-atm-simulation/datasource"
+	"go-atm-simulation/delivery"
 	"go-atm-simulation/repository"
-	"go-atm-simulation/service"
+	"go-atm-simulation/usecase"
 )
 
 func main() {
-	repository := repository.New()
-	service := service.New(repository)
-	cmd.Start(service)
+	userRepository := repository.NewUserRepository()
+	userUseCase := usecase.NewUserUseCase(userRepository)
+	userDelivery := delivery.NewUserController(userUseCase)
+	datasource.Accounts = datasource.New()
+	cmd.Start(userDelivery)
 }
